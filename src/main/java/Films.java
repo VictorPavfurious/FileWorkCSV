@@ -6,10 +6,10 @@ public class Films {
     private int id;
 
 
-    public Films(String title, String over , int id) {
-        this.title = title;
-        this.overview = over;
+    public Films(int id, String title, String overview) {
         this.id = id;
+        this.title = title;
+        this.overview = overview;
     }
 
     public int getId() {
@@ -34,5 +34,18 @@ public class Films {
 
     public void setOverview(String overview) {
         this.overview = overview;
+    }
+
+    @Override
+    public String toString() {
+        return "Films{" +
+                "title='" + title + '\'' +
+                ", overview='" + overview + '\'' +
+                ", id=" + id +
+                '}';
+    }
+
+    public void entryFilm () {
+
     }
 }

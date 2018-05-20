@@ -7,7 +7,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
+import java.io.*;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -27,25 +27,43 @@ public class ListFilms extends HttpServlet {
         JSONObject obj = new JSONObject(str);
 
 
+        String COMMA_DELIMITER = ",";
+
         ArrayList<Films> films = new ArrayList<Films>();
         JSONArray array = obj.getJSONArray("results");
 
-
         for (int i = 0; i < array.length(); i++) {
-            films.add(new Films(array.getJSONObject(i).getString("title"), array.getJSONObject(i).getString("overview"),
-                    array.getJSONObject(i).getInt("id")));
+            films.add(new Films(array.getJSONObject(i).getInt("id"), array.getJSONObject(i).getString("title"),
+                    array.getJSONObject(i).getString("overview")));
         }
 
-        String[] list = new String[films.size()];
+        File file = new File("src\\data\\filmdata.csv");
+        FileWriter fileWriter = new FileWriter(file);
 
-        for (int i = 0; i < list.length; i++) {
-            list[i] = films.get(i).getTitle();
+
+        for (int i = 0; i < films.size(); i++) {
+            fileWriter.write(String.valueOf(films.get(i).getId()));
+            fileWriter.write(COMMA_DELIMITER);
+            fileWriter.write(films.get(i).getTitle());
+            fileWriter.write(COMMA_DELIMITER);
+
 
         }
+        fileWriter.flush();
+        fileWriter.close();
 
-        request.setAttribute("filmlist", list);
+
+        FileReader fileReader = new FileReader(file);
+        Scanner sc= new Scanner(fileReader);
+
+        while (sc.hasNextLine()) {
+            request.setAttribute("filmlist", sc.nextLine());
+        }
+
+        fileReader.close();
 
        request.getRequestDispatcher("index.jsp").forward(request, response);
+
 
     }
 

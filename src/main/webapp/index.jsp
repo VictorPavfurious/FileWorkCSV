@@ -12,9 +12,8 @@
 <h2> Hello ${param.name} </h2>
 
 
-
-<c:forEach var="listfilm" items="${filmlist}">
-    <p> ${listfilm} </p>
+<c:forEach var="listfilm" items="${filmlist}" >
+    <p> <a href="view?id=${listfilm}"> ${listfilm}</a> </p>
 </c:forEach>
 
 

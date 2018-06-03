@@ -38,14 +38,7 @@ public class Films {
 
     @Override
     public String toString() {
-        return "Films{" +
-                "title='" + title + '\'' +
-                ", overview='" + overview + '\'' +
-                ", id=" + id +
-                '}';
+        return  id + " " + title + " " + overview;
     }
 
-    public void entryFilm () {
-
-    }
 }

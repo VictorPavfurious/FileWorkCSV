@@ -32,11 +32,11 @@ public class ViewFilms extends HttpServlet {
             }
         }
 
-        for (int i = 0; i < filmlist.size(); i++) {
-            if(request.getParameter("id").equals(filmlist.get(i).getTitle())) {
-                request.setAttribute("over", filmlist.get(i).getOverview());
+        for (Films films : filmlist)
+            if(request.getParameter("id").equals(String.valueOf(films.getId()))) {
+                request.setAttribute("description", films.getOverview());
             }
-        }
+
 
 
 

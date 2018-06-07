@@ -12,9 +12,15 @@
 <h2> Hello ${param.name} </h2>
 
 
-<c:forEach var="listfilm" items="${filmlist}" >
-    <p> <a href="view?id=${listfilm}"> ${listfilm}</a> </p>
+<c:forEach var= "film" items="${list}" >
+    <p> <a href="view?id=<c:out value="${film.id}"/>"> <c:out value="${film.title}"/> </a> </p>
 </c:forEach>
+
+
+
+
+
+
 
 
 <a href="HelloUser.jsp">Back for new login</a>

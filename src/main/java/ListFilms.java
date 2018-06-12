@@ -5,23 +5,40 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
+import java.sql.SQLException;
 
 
 public class ListFilms extends HttpServlet {
 
-    private CrudFilms crudFilms;
+    private FilmsAllUse filmsAllUse;
 
     public ListFilms() {
         super();
-        crudFilms = new CrudFilms();
+        filmsAllUse = new FilmsAllUse();
     }
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+        try {
 
-        request.setAttribute("list", crudFilms.listAllFilms());
+           filmsAllUse.Createdb();
 
-       request.getRequestDispatcher("index.jsp").forward(request, response);
+            request.setAttribute("list", filmsAllUse.listAllFilms());
+
+        }
+
+
+       catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+
+        catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+
+        request.getRequestDispatcher("index.jsp").forward(request, response);
 
 
     }
